@@ -24,5 +24,4 @@ Pod::Spec.new do |s|
   s.dependency "GRKOpenSSLFramework"
   s.dependency "CoreBitcoin"
   s.dependency "secp256k1.swift"
-  s.dependency "OpenSSL-Universal"
 end
