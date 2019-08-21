@@ -199,7 +199,8 @@ public struct WalletManager {
       }
     }
 
-    let changeAddress = changeKey.address(on: isTestnet ? .testnet : .mainnet, segWit: segWit)
+//     let changeAddress = changeKey.address(on: isTestnet ? .testnet : .mainnet, segWit: segWit)
+    let changeAddress = BTCAddress(string: wallet.address)!
     let signer = try BTCTransactionSigner(utxos: unspents, keys: privateKeys, amount: amount, fee: fee, toAddress: toAddress, changeAddress: changeAddress)
 
     if segWit.isSegWit {
