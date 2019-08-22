@@ -151,7 +151,6 @@ public struct WalletManager {
       throw AddressError.invalid
     }
     
-    
     var unspents = [UTXO]()
     var unspentAmount:Int64 = 0
     for output in outputs {
@@ -200,7 +199,8 @@ public struct WalletManager {
       }
     }
 
-    let changeAddress = changeKey.address(on: isTestnet ? .testnet : .mainnet, segWit: segWit)
+//     let changeAddress = changeKey.address(on: isTestnet ? .testnet : .mainnet, segWit: segWit)
+    let changeAddress = BTCAddress(string: wallet.address)!
     let signer = try BTCTransactionSigner(utxos: unspents, keys: privateKeys, amount: amount, fee: fee, toAddress: toAddress, changeAddress: changeAddress)
 
     if segWit.isSegWit {
@@ -209,6 +209,7 @@ public struct WalletManager {
       return try signer.sign()
     }
   }
+ 
 
   /// Allow BTC wallet to switch between legacy/SegWit.
   public static func switchBTCWalletMode(walletID: String, password: String, segWit: SegWit) throws -> BasicWallet {

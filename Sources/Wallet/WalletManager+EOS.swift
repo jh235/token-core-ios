@@ -77,7 +77,6 @@ public extension WalletManager {
     return try EOSTransactionSigner(txs: txs, keystore: wallet.keystore, password: password).sign()
   }
   
-  
   public static func eosEcSign(walletID: String, data: String, isHex: Bool, publicKey: String?, password: String) throws -> String {
     guard let wallet = Identity.currentIdentity?.findWalletByWalletID(walletID) else {
       throw GenericError.walletNotFound
