@@ -95,6 +95,10 @@ public extension Identity {
 extension Identity {
   func append(_ newKeystore: Keystore) throws -> BasicWallet {
     let wallet = BasicWallet(newKeystore)
+    
+    if findWalletByAddress(wallet.address.removePrefix0xIfNeeded(), on: newKeystore.meta.chain!) != nil {
+      throw AddressError.alreadyExist
+    }
 
     keystore.wallets.append(wallet)
     keystore.walletIds.append(wallet.walletID)
@@ -278,7 +282,7 @@ extension Identity {
 
   func findWalletByAddress(_ address: String, on chainType: ChainType) -> BasicWallet? {
     return keystore.wallets.first { (wallet) -> Bool in
-      return wallet.address == address && wallet.imTokenMeta.chain == chainType
+      return wallet.address.removePrefix0xIfNeeded() == address.removePrefix0xIfNeeded() && wallet.imTokenMeta.chain == chainType
     }
   }
 
