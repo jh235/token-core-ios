@@ -171,7 +171,7 @@ public struct WalletManager {
       unspentAmount += unspent.amount
       inputNum += 1
       // 148 x inputNum + 34 x outputNum + 10 * rate
-      fee = Int64(148 * inputNum + 34 * 2 + 10) * fee
+      fee = Int64(148 * inputNum + 34 * 2 + 10) * feeRate
       //changeAmount must more than the 2730
       if unspentAmount > (amount + fee + 2730) {
         break
